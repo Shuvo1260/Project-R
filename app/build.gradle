@@ -10,16 +10,30 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+
+    dataBinding {
+        enabled = true
+    }
+
+
 }
 
 dependencies {
@@ -31,4 +45,35 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+
+
+
+    // CardView dependency
+    implementation "androidx.cardview:cardview:1.0.0"
+
+
+    // Kotlin dependency
+    implementation "org.koin:koin-core:2.1.0-alpha-1"
+
+    // Material design library dependecy
+//    implementation 'com.google.android.material:material:1.2.0-alpha01'
+    implementation 'com.google.android.material:material:1.2.0-alpha06'
+
+
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // Android support dependency
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    def appcompat_version = "1.1.0"
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+    // Fragment dependency
+    implementation 'androidx.fragment:fragment:1.1.0-rc04'
+
+
+
+    // Multidex dependecy
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
+
 }
