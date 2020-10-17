@@ -24,16 +24,32 @@
 
     </com.skyfishjy.library.RippleBackground>
 
-    <ImageButton
+    <Button
         android:id="@+id/play"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:src="@drawable/ic_play"
-        android:scaleType="fitXY"
+        android:layout_width="@dimen/_120sdp"
+        android:layout_height="@dimen/_120sdp"
         android:layout_marginBottom="30dp"
-        android:background="@android:color/transparent"
+        android:background="@drawable/white_circle_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.skyfishjy.library.RippleBackground
+        android:id="@+id/buttRippleEffect"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:rb_color="@color/colorPrimary"
+        app:rb_radius="10dp"
+        app:rb_rippleAmount="8"
+        app:rb_scale="10"
+        app:rb_type="strokeRipple"
+        app:rb_strokeWidth="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/play"
+        app:layout_constraintEnd_toEndOf="@id/play"
+        app:layout_constraintStart_toStartOf="@id/play"
+        app:layout_constraintTop_toTopOf="@id/play">
+
+    </com.skyfishjy.library.RippleBackground>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.skyfishjy.library.RippleBackground;
@@ -15,7 +16,8 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";
     private RippleBackground rippleBackground;
-    private ImageButton play;
+    private RippleBackground buttonRippleBackground;
+    private Button play;
     private MediaPlayer mediaPlayer;
 
     private int[] audioList = {
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Finding views
         rippleBackground = findViewById(R.id.rippleEffect);
+        buttonRippleBackground = findViewById(R.id.buttRippleEffect);
         play = findViewById(R.id.play);
 
         // Setting play button on click listener
@@ -44,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Starting animation
-                play.setVisibility(View.INVISIBLE);
+                play.setEnabled(false);
                 rippleBackground.startRippleAnimation();
+                buttonRippleBackground.startRippleAnimation();
 
                 Random rand = new Random();
                 int index = rand.nextInt(6);
@@ -67,7 +71,8 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         rippleBackground.stopRippleAnimation();
-                        play.setVisibility(View.VISIBLE);
+                        buttonRippleBackground.stopRippleAnimation();
+                        play.setEnabled(true);
                         mediaPlayer.release();
                     }
                 });
@@ -80,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (mediaPlayer != null) {
+            rippleBackground.stopRippleAnimation();
+            buttonRippleBackground.stopRippleAnimation();
+            play.setEnabled(true);
             mediaPlayer.release();
         }
     }
