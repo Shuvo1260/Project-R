@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.skyfishjy.library.RippleBackground;
 
 import java.util.Random;
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private RippleBackground buttonRippleBackground;
     private Button play;
     private MediaPlayer mediaPlayer;
+    private ImageView done;
 
     private int[] audioList = {
             R.raw.one,
@@ -41,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         rippleBackground = findViewById(R.id.rippleEffect);
         buttonRippleBackground = findViewById(R.id.buttRippleEffect);
         play = findViewById(R.id.play);
+        done = findViewById(R.id.done);
 
         // Setting play button on click listener
         play.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +81,19 @@ public class MainActivity extends AppCompatActivity {
                         buttonRippleBackground.stopRippleAnimation();
                         play.setEnabled(true);
                         mediaPlayer.release();
+                        SystemClock.sleep(100);
+                        mediaPlayer = MediaPlayer.create(MainActivity.this, R.raw.ding);
+                        mediaPlayer.start();
+                        done.setVisibility(View.VISIBLE);
+
+                        Handler handler1 = new Handler();
+                        handler1.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                done.setVisibility(View.GONE);
+                            }
+                        }, 1500);
+
                     }
                 });
                 Log.d(TAG, "onClick: ");
